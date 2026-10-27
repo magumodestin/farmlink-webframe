@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farmlinkweb — UI Design & Wireframe</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --earth: #2D4A1E;
+    --earth-mid: #4A7C35;
+    --leaf: #6DAA3F;
+    --lime: #A8CC5A;
+    --sand: #F5F0E8;
+    --clay: #C8A96E;
+    --rust: #D4651A;
+    --cream: #FDFAF4;
+    --dark: #1A2810;
+    --muted: #7A8C6E;
+    --phone-w: 300px;
+    --phone-h: 600px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* ─── HERO HEADER ─────────────────────────────── */
+  .hero {
+    background: var(--earth);
+    padding: 48px 40px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 80% 50%, rgba(109,170,63,0.18) 0%, transparent 55%),
+      radial-gradient(circle at 10% 80%, rgba(168,204,90,0.1) 0%, transparent 45%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(168,204,90,0.2);
+    border: 1px solid rgba(168,204,90,0.4);
+    color: var(--lime);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    max-width: 600px;
+    position: relative;
+  }
+  .hero h1 span { color: var(--lime); }
+  .hero p {
+    margin-top: 14px;
+    color: rgba(255,255,255,0.6);
+    font-size: 15px;
+    max-width: 480px;
+    line-height: 1.6;
+    position: relative;
+  }
+  .hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+    position: relative;
+  }
+  .chip {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.75);
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 100px;
+  }
+
+  /* ─── SECTION LABELS ──────────────────────────── */
+  .section {
+    padding: 56px 40px;
+  }
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--leaf);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(22px, 3.5vw, 34px);
+    font-weight: 700;
+    color: var(--earth);
+    line-height: 1.2;
+    margin-bottom: 40px;
+  }
+
+  /* ─── WIREFRAME ANNOTATION BOX ────────────────── */
+  .wireframe-note {
+    background: #FFF8E7;
+    border-left: 3px solid var(--clay);
+    padding: 10px 16px;
+    font-size: 12px;
+    color: #8B6914;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 32px;
+    display: inline-block;
+  }
+
+  /* ─── PHONE SHELLS ────────────────────────────── */
+  .phones-row {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .phone-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .phone-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .phone {
+    width: var(--phone-w);
+    height: var(--phone-h);
+    background: #fff;
+    border-radius: 40px;
+    border: 3px solid #1A2810;
+    box-shadow: 6px 6px 0 #2D4A1E, 0 20px 60px rgba(0,0,0,0.15);
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+  /* notch */
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 90px; height: 22px;
+    background: #1A2810;
+    border-radius: 0 0 16px 16px;
+    z-index: 10;
+  }
+  .phone-inner {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--sand);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ─── SCREEN: FARMER UPLOAD ───────────────────── */
+  .s-topbar {
+    background: var(--earth);
+    padding: 32px 16px 12px;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .s-topbar .greeting { font-size: 10px; opacity: 0.6; }
+  .s-topbar .name { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; margin-top: 1px; }
+  .s-topbar .stats {
+    display: flex; gap: 10px; margin-top: 10px;
+  }
+  .s-stat {
+    background: rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 10px;
+    flex: 1;
+  }
+  .s-stat .val { font-size: 14px; font-weight: 700; display: block; }
+
+  .s-body { flex: 1; overflow: hidden; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+
+  .s-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 10px 12px;
+    flex-shrink: 0;
+  }
+  .s-card-title { font-size: 10px; font-weight: 600; color: var(--earth); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .upload-zone {
+    border: 2px dashed var(--clay);
+    border-radius: 10px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: var(--clay);
+    background: rgba(200,169,110,0.07);
+    gap: 6px;
+  }
+  .upload-icon { font-size: 18px; }
+
+  .form-row { display: flex; gap: 6px; }
+  .f-input {
+    flex: 1;
+    background: var(--sand);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 7px;
+    height: 28px;
+    font-size: 9px;
+    color: var(--muted);
+    padding: 0 8px;
+    display: flex; align-items: center;
+  }
+  .f-input.short { flex: 0 0 60px; }
+
+  .urgent-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(212,101,26,0.08);
+    border: 1px solid rgba(212,101,26,0.2);
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 9px;
+    color: var(--rust);
+    font-weight: 600;
+  }
+  .toggle-pill {
+    width: 28px; height: 14px;
+    background: var(--rust);
+    border-radius: 7px;
+    position: relative;
+  }
+  .toggle-pill::after {
+    content: '';
+    position: absolute;
+    right: 2px; top: 2px;
+    width: 10px; height: 10px;
+    background: #fff;
+    border-radius: 50%;
+  }
+
+  .price-suggest {
+    background: linear-gradient(135deg, rgba(109,170,63,0.1), rgba(45,74,30,0.05));
+    border: 1px solid rgba(109,170,63,0.25);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 8.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .price-dot { width: 6px; height: 6px; background: var(--leaf); border-radius: 50%; flex-shrink: 0; }
+  .price-suggest span { color: var(--muted); }
+  .price-suggest strong { color: var(--earth); }
+
+  .s-btn {
+    background: var(--earth);
+    color: #fff;
+    border-radius: 10px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    margin: 0 12px 12px;
+  }
+
+  .s-nav {
+    display: flex;
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.07);
+    padding: 8px 0 4px;
+    flex-shrink: 0;
+  }
+  .nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    font-size: 7.5px;
+    color: var(--muted);
+  }
+  .nav-item.active { color: var(--earth); }
+  .nav-icon { font-size: 16px; }
+
+  /* ─── SCREEN: BUYER BROWSE ────────────────────── */
+  .b-search {
+    background: #fff;
+    border-radius: 10px;
+    height: 30px;
+    border: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 9px;
+    color: var(--muted);
+    gap: 6px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+  }
+  .b-filters {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .b-filter {
+    background: var(--earth);
+    color: #fff;
+    border-radius: 100px;
+    padding: 4px 10px;
+    font-size: 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .b-filter.light {
+    background: #fff;
+    color: var(--muted);
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .produce-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    overflow: hidden;
+  }
+  .produce-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .produce-img {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+  .produce-img.tomato { background: linear-gradient(135deg, #FFE5DE, #FFC4B8); }
+  .produce-img.maize  { background: linear-gradient(135deg, #FFF5CC, #FFE88A); }
+  .produce-img.spinach { background: linear-gradient(135deg, #DDF3CC, #B8E899); }
+  .produce-img.onion  { background: linear-gradient(135deg, #F0E6FF, #DBC8FF); }
+
+  .produce-info { padding: 7px 8px; }
+  .produce-name { font-size: 9.5px; font-weight: 600; color: var(--dark); }
+  .produce-farmer { font-size: 8px; color: var(--muted); margin: 1px 0; }
+  .produce-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+  }
+  .produce-price { font-size: 10px; font-weight: 700; color: var(--earth); }
+  .produce-km { font-size: 7.5px; color: var(--muted); }
+  .waste-badge {
+    background: var(--rust);
+    color: #fff;
+    font-size: 7px;
+    font-weight: 700;
+    padding: 2px 5px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 2px;
+  }
+
+  /* ─── SCREEN: PRODUCT DETAIL ──────────────────── */
+  .detail-img {
+    height: 140px;
+    background: linear-gradient(135deg, #DDF3CC, #A8CC5A);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .back-btn {
+    position: absolute;
+    top: 36px; left: 12px;
+    width: 28px; height: 28px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .detail-body { flex: 1; padding: 12px; overflow: hidden; display: flex; flex-direction: column; gap: 8px; }
+  .detail-row { display: flex; align-items: flex-start; justify-content: space-between; }
+  .detail-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--dark); }
+  .detail-price { font-size: 18px; font-weight: 700; color: var(--earth); }
+  .detail-sub { font-size: 9px; color: var(--muted); }
+  .farmer-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--sand);
+    border-radius: 10px;
+    padding: 8px 10px;
+    flex-shrink: 0;
+  }
+  .farmer-avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--earth);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 10px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .farmer-name { font-size: 9.5px; font-weight: 600; }
+  .farmer-loc { font-size: 8px; color: var(--muted); }
+  .stars { color: var(--clay); font-size: 9px; }
+  .qty-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .qty-label { font-size: 9px; color: var(--muted); flex: 1; }
+  .qty-ctrl {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .qty-btn { color: var(--earth); font-size: 14px; cursor: pointer; }
+  .logistics-row {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .log-opt {
+    flex: 1;
+    background: #fff;
+    border: 1.5px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 7px 6px;
+    text-align: center;
+    font-size: 7.5px;
+    color: var(--muted);
+  }
+  .log-opt.active { border-color: var(--leaf); background: rgba(109,170,63,0.07); color: var(--earth); }
+  .log-icon { font-size: 14px; display: block; margin-bottom: 2px; }
+  .log-opt.active .log-label { font-weight: 600; }
+  .cta-row {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+    flex-shrink: 0;
+  }
+  .cta-wa {
+    background: #25D366;
+    color: #fff;
+    border-radius: 10px;
+    height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 600;
+    gap: 5px;
+    flex: 1;
+  }
+  .cta-order {
+    background: var(--earth);
+    color: #fff;
+    border-radius: 10px;
+    height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 600;
+    flex: 2;
+  }
+
+  /* ─── ANNOTATION CALLOUTS ─────────────────────── */
+  .annotations {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 220px;
+    flex-shrink: 0;
+    padding-top: 48px;
+  }
+  .ann {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .ann-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .ann-dot.green { background: var(--leaf); }
+  .ann-dot.orange { background: var(--rust); }
+  .ann-dot.clay { background: var(--clay); }
+  .ann-dot.dark { background: var(--earth); }
+  .ann-text { font-size: 12px; line-height: 1.5; color: var(--dark); }
+  .ann-text strong { color: var(--earth); font-weight: 600; }
+
+  /* ─── COLOUR + TYPOGRAPHY GUIDE ──────────────── */
+  .guide-section {
+    background: var(--earth);
+    padding: 56px 40px;
+    color: #fff;
+  }
+  .guide-section .section-label { color: var(--lime); }
+  .guide-section .section-title { color: #fff; }
+  .colour-swatches {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .swatch {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+  .swatch-circle {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.15);
+  }
+  .swatch-name { font-size: 10px; color: rgba(255,255,255,0.6); text-align: center; }
+  .swatch-hex { font-size: 9px; color: rgba(255,255,255,0.35); text-align: center; font-family: monospace; }
+
+  .type-samples {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .type-row { display: flex; align-items: baseline; gap: 16px; }
+  .type-label { font-size: 10px; color: rgba(255,255,255,0.4); min-width: 90px; }
+  .t-display { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: #fff; }
+  .t-h2 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: var(--lime); }
+  .t-body { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.75); }
+  .t-caption { font-size: 11px; color: rgba(255,255,255,0.45); }
+  .t-btn { font-size: 12px; font-weight: 600; background: var(--leaf); color: #fff; padding: 8px 16px; border-radius: 8px; letter-spacing: 0.5px; }
+
+  /* ─── FEATURE GRID ────────────────────────────── */
+  .features-bg {
+    background: var(--sand);
+    padding: 56px 40px;
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .feature-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: rgba(109,170,63,0.07);
+  }
+  .feature-icon { font-size: 24px; margin-bottom: 10px; }
+  .feature-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--earth); margin-bottom: 6px; }
+  .feature-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .feature-tag {
+    display: inline-block;
+    background: rgba(109,170,63,0.12);
+    color: var(--earth-mid);
+    font-size: 9px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 100px;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .feature-tag.mvp { background: rgba(212,101,26,0.1); color: var(--rust); }
+
+  /* ─── USER FLOW DIAGRAM ───────────────────────── */
+  .flow-section {
+    background: #fff;
+    padding: 56px 40px;
+  }
+  .flow-diagram {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  .flow-node {
+    background: var(--sand);
+    border: 1.5px solid rgba(45,74,30,0.15);
+    border-radius: 12px;
+    padding: 12px 16px;
+    text-align: center;
+    flex-shrink: 0;
+    min-width: 100px;
+  }
+  .flow-node.green { background: var(--earth); border-color: var(--earth); }
+  .flow-node.green .fn-title { color: #fff; }
+  .flow-node.green .fn-sub { color: rgba(255,255,255,0.6); }
+  .flow-node.accent { background: rgba(109,170,63,0.12); border-color: var(--leaf); }
+  .fn-emoji { font-size: 18px; margin-bottom: 4px; }
+  .fn-title { font-size: 11px; font-weight: 600; color: var(--earth); }
+  .fn-sub { font-size: 9px; color: var(--muted); margin-top: 2px; }
+  .flow-arrow {
+    font-size: 18px;
+    color: var(--clay);
+    flex-shrink: 0;
+    padding: 0 4px;
+  }
+
+  .dual-flow {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .flow-col { flex: 1; min-width: 280px; }
+  .flow-col-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--earth);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .role-badge {
+    font-size: 9px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .role-badge.farmer { background: var(--earth); color: #fff; }
+  .role-badge.buyer { background: var(--leaf); color: #fff; }
+
+  /* ─── FOOTER ──────────────────────────────────── */
+  .footer {
+    background: var(--dark);
+    padding: 32px 40px;
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 12px;
+  }
+  .footer strong { color: var(--lime); }
+
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-tag">UI/UX Design Concept</div>
+  <h1>Farmlink<br></h1>
+  <p>Wireframes, UI screens, and design system for a farmer-to-buyer marketplace built for South Africa.</p>
+  <div class="hero-chips">
+    <div class="chip">Figma-ready concept</div>
+    <div class="chip">Mobile-first</div>
+    <div class="chip">Low-data mode</div>
+    <div class="chip">WhatsApp MVP</div>
+    <div class="chip">South Africa 🇿🇦</div>
+  </div>
+</div>
+
+<!-- ── WIREFRAME SCREENS ── -->
+<div class="section">
+  <div class="section-label">Step 01 — Wireframes & UI Screens</div>
+  <div class="section-title">Three core screens, fully designed</div>
+  <div class="wireframe-note">📐 Annotated UI mockups — click through flows to understand each screen</div>
+
+  <div class="phones-row">
+
+    <!-- PHONE 1: FARMER UPLOAD -->
+    <div class="phone-wrap">
+      <div class="phone-label">Screen 1 — Farmer: List Produce</div>
+      <div class="phone">
+        <div class="phone-inner">
+          <div class="s-topbar">
+            <div class="greeting">Good morning 👋</div>
+            <div class="name">Sipho Dlamini</div>
+            <div class="stats">
+              <div class="s-stat"><span class="val">12</span>Active listings</div>
+              <div class="s-stat"><span class="val">R3,240</span>This week</div>
+              <div class="s-stat"><span class="val">4.8★</span>Rating</div>
+            </div>
+          </div>
+          <div class="s-body">
+            <div class="s-card">
+              <div class="s-card-title">📦 List New Produce</div>
+              <div class="upload-zone">
+                <span class="upload-icon">📷</span>
+                <span>Tap to add photos</span>
+              </div>
+            </div>
+            <div class="s-card">
+              <div class="form-row">
+                <div class="f-input">🌽 Product name…</div>
+                <div class="f-input short">Category ▾</div>
+              </div>
+              <div style="height:6px"></div>
+              <div class="form-row">
+                <div class="f-input">Quantity (kg)</div>
+                <div class="f-input">Price per kg</div>
+              </div>
+              <div style="height:6px"></div>
+              <div class="price-suggest">
+                <div class="price-dot"></div>
+                <span>Smart price: <strong>R8.50–R11/kg</strong> for tomatoes nearby</span>
+              </div>
+            </div>
+            <div class="s-card">
+              <div class="f-input" style="margin-bottom:6px">📍 Farm location</div>
+              <div class="urgent-toggle">
+                🔥 Urgent sale — discount offer
+                <div class="toggle-pill"></div>
+              </div>
+            </div>
+          </div>
+          <div class="s-btn">List Produce →</div>
+          <div class="s-nav">
+            <div class="nav-item active"><span class="nav-icon">🏠</span>Home</div>
+            <div class="nav-item"><span class="nav-icon">📦</span>Listings</div>
+            <div class="nav-item"><span class="nav-icon">💬</span>Messages</div>
+            <div class="nav-item"><span class="nav-icon">👤</span>Profile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANNOTATIONS 1 -->
+    <div class="annotations">
+      <div class="ann">
+        <div class="ann-dot green"></div>
+        <div class="ann-text"><strong>Smart pricing AI</strong> — suggests fair market rate based on nearby listings</div>
+      </div>
+      <div class="ann">
+        <div class="ann-dot orange"></div>
+        <div class="ann-text"><strong>Urgent sale toggle</strong> — auto-applies discount badge to clear expiring stock</div>
+      </div>
+      <div class="ann">
+        <div class="ann-dot clay"></div>
+        <div class="ann-text"><strong>Photo upload</strong> — camera or gallery; compressed for low-data</div>
+      </div>
+      <div class="ann">
+        <div class="ann-dot dark"></div>
+        <div class="ann-text"><strong>Dashboard header</strong> — shows earnings + rating at a glance</div>
+      </div>
+    </div>
+
+    <!-- PHONE 2: BUYER BROWSE -->
+    <div class="phone-wrap">
+      <div class="phone-label">Screen 2 — Buyer: Browse Market</div>
+      <div class="phone">
+        <div class="phone-inner">
+          <div class="s-topbar">
+            <div class="greeting">📍 Limpopo, 15km radius</div>
+            <div class="name">Fresh Market</div>
+          </div>
+          <div class="s-body">
+            <div class="b-search">🔍 Search tomatoes, maize…</div>
+            <div class="b-filters">
+              <div class="b-filter">🌿 All produce</div>
+              <div class="b-filter light">📍 Nearest</div>
+              <div class="b-filter light">💰 Price ↑</div>
+              <div class="b-filter light">🔥 Urgent</div>
+            </div>
+            <div class="produce-grid">
+              <div class="produce-card">
+                <div class="produce-img tomato">🍅</div>
+                <div class="produce-info">
+                  <div class="produce-name">Roma Tomatoes</div>
+                  <div class="produce-farmer">Sipho Farm · ★4.8</div>
+                  <div class="produce-bottom">
+                    <div class="produce-price">R9/kg</div>
+                    <div class="produce-km">3.2km</div>
+                  </div>
+                </div>
+              </div>
+              <div class="produce-card">
+                <div class="produce-img maize">🌽</div>
+                <div class="produce-info">
+                  <div class="produce-name">White Maize</div>
+                  <div class="produce-farmer">Mokoena · ★4.5</div>
+                  <div class="produce-bottom">
+                    <div class="produce-price">R6/kg</div>
+                    <div class="produce-km">7km</div>
+                  </div>
+                  <div class="waste-badge">🔥 -30% URGENT</div>
+                </div>
+              </div>
+              <div class="produce-card">
+                <div class="produce-img spinach">🥬</div>
+                <div class="produce-info">
+                  <div class="produce-name">Spinach Bunch</div>
+                  <div class="produce-farmer">Nkosi Farm · ★4.9</div>
+                  <div class="produce-bottom">
+                    <div class="produce-price">R12/kg</div>
+                    <div class="produce-km">1.8km</div>
+                  </div>
+                </div>
+              </div>
+              <div class="produce-card">
+                <div class="produce-img onion">🧅</div>
+                <div class="produce-info">
+                  <div class="produce-name">Brown Onions</div>
+                  <div class="produce-farmer">Dube Farm · ★4.7</div>
+                  <div class="produce-bottom">
+                    <div class="produce-price">R7/kg</div>
+                    <div class="produce-km">5.5km</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="s-nav">
+            <div class="nav-item active"><span class="nav-icon">🛒</span>Market</div>
+            <div class="nav-item"><span class="nav-icon">❤️</span>Saved</div>
+            <div class="nav-item"><span class="nav-icon">📋</span>Orders</div>
+            <div class="nav-item"><span class="nav-icon">👤</span>Account</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHONE 3: PRODUCT DETAIL -->
+    <div class="phone-wrap">
+      <div class="phone-label">Screen 3 — Buyer: Order Screen</div>
+      <div class="phone">
+        <div class="phone-inner">
+          <div class="detail-img">
+            🍅
+            <div class="back-btn">←</div>
+          </div>
+          <div class="detail-body">
+            <div class="detail-row">
+              <div>
+                <div class="detail-title">Roma Tomatoes</div>
+                <div class="detail-sub">50 kg available · Harvested today</div>
+              </div>
+              <div style="text-align:right">
+                <div class="detail-price">R9/kg</div>
+                <div class="detail-sub">Min 5kg</div>
+              </div>
+            </div>
+            <div class="farmer-row">
+              <div class="farmer-avatar">SD</div>
+              <div style="flex:1">
+                <div class="farmer-name">Sipho Dlamini</div>
+                <div class="farmer-loc">📍 Tzaneen, Limpopo — 3.2km away</div>
+                <div class="stars">★★★★★ 4.8 (34 reviews)</div>
+              </div>
+            </div>
+            <div class="qty-row">
+              <div class="qty-label">Quantity (kg)</div>
+              <div class="qty-ctrl">
+                <span class="qty-btn">−</span>
+                <span>10</span>
+                <span class="qty-btn">+</span>
+              </div>
+              <div style="font-size:11px;font-weight:700;color:var(--earth);margin-left:8px">= R90</div>
+            </div>
+            <div>
+              <div style="font-size:9px;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px">Delivery options</div>
+              <div class="logistics-row">
+                <div class="log-opt active">
+                  <span class="log-icon">🚗</span>
+                  <span class="log-label">Self pickup</span>
+                </div>
+                <div class="log-opt">
+                  <span class="log-icon">🛵</span>
+                  <span class="log-label">Local driver</span>
+                </div>
+                <div class="log-opt">
+                  <span class="log-icon">👥</span>
+                  <span class="log-label">Group delivery</span>
+                </div>
+              </div>
+            </div>
+            <div class="cta-row">
+              <div class="cta-wa">💬 WhatsApp</div>
+              <div class="cta-order">Place Order →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end phones-row -->
+</div>
+
+<!-- ── USER FLOWS ── -->
+<div class="flow-section">
+  <div class="section-label">Step 02 — User Flows</div>
+  <div class="section-title">How each user moves through the app</div>
+
+  <div class="dual-flow">
+    <div class="flow-col">
+      <div class="flow-col-title">
+        <span class="role-badge farmer">🌾 Farmer</span>
+        Listing flow
+      </div>
+      <div class="flow-diagram">
+        <div class="flow-node green"><div class="fn-emoji">📲</div><div class="fn-title">Sign up</div><div class="fn-sub">Phone + location</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div class="fn-emoji">📦</div><div class="fn-title">Add produce</div><div class="fn-sub">Photo, qty, price</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node accent"><div class="fn-emoji">💡</div><div class="fn-title">Price suggest</div><div class="fn-sub">AI recommends</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node green"><div class="fn-emoji">✅</div><div class="fn-title">Live listing</div><div class="fn-sub">Buyers see it</div></div>
+      </div>
+    </div>
+    <div class="flow-col">
+      <div class="flow-col-title">
+        <span class="role-badge buyer">🛒 Buyer</span>
+        Purchase flow
+      </div>
+      <div class="flow-diagram">
+        <div class="flow-node green"><div class="fn-emoji">🔍</div><div class="fn-title">Browse</div><div class="fn-sub">Filter by area</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div class="fn-emoji">📋</div><div class="fn-title">View listing</div><div class="fn-sub">Farmer + ratings</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div class="fn-emoji">💬</div><div class="fn-title">WhatsApp/Order</div><div class="fn-sub">Direct contact</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node green"><div class="fn-emoji">🚗</div><div class="fn-title">Pickup/Delivery</div><div class="fn-sub">Confirm & go</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FEATURE CARDS ── -->
+<div class="features-bg">
+  <div class="section-label">Step 03 — Features</div>
+  <div class="section-title">What the UI needs to support</div>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon">💡</div>
+      <div class="feature-name">Smart pricing</div>
+      <div class="feature-desc">Shows farmers a suggested price range based on nearby listings and seasonal demand.</div>
+      <div class="feature-tag">Phase 2</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📶</div>
+      <div class="feature-name">Offline / low data mode</div>
+      <div class="feature-desc">Core listings cached locally. Works on 2G. Images compressed automatically.</div>
+      <div class="feature-tag mvp">MVP</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔥</div>
+      <div class="feature-name">Waste alert discounts</div>
+      <div class="feature-desc">Farmers mark stock as urgent — auto badge with % discount visible to nearby buyers.</div>
+      <div class="feature-tag mvp">MVP</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⭐</div>
+      <div class="feature-name">Ratings & verification</div>
+      <div class="feature-desc">Both farmers and buyers are rated. New farmers get verified badge after first 3 sales.</div>
+      <div class="feature-tag">Phase 2</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏢</div>
+      <div class="feature-name">Bulk buying (B2B)</div>
+      <div class="feature-desc">Restaurants and shops can post bulk buy requests. Farmers respond with quotes.</div>
+      <div class="feature-tag">Phase 3</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💬</div>
+      <div class="feature-name">WhatsApp integration</div>
+      <div class="feature-desc">MVP flow — buyer taps WhatsApp button to contact farmer directly. No payment system needed yet.</div>
+      <div class="feature-tag mvp">MVP</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── COLOUR + TYPE ── -->
+<div class="guide-section">
+  <div class="section-label">Step 04 — Design System</div>
+  <div class="section-title" style="margin-bottom:32px">Colours & typography</div>
+
+  <div class="colour-swatches">
+    <div class="swatch">
+      <div class="swatch-circle" style="background:#2D4A1E;"></div>
+      <div class="swatch-name">Earth Dark</div>
+      <div class="swatch-hex">#2D4A1E</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-circle" style="background:#4A7C35;"></div>
+      <div class="swatch-name">Earth Mid</div>
+      <div class="swatch-hex">#4A7C35</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-circle" style="background:#6DAA3F;"></div>
+      <div class="swatch-name">Leaf Green</div>
+      <div class="swatch-hex">#6DAA3F</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-circle" style="background:#A8CC5A;"></div>
+      <div class="swatch-name">Lime Accent</div>
+      <div class="swatch-hex">#A8CC5A</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-circle" style="background:#C8A96E; border-color:rgba(255,255,255,0.3);"></div>
+      <div class="swatch-name">Clay</div>
+      <div class="swatch-hex">#C8A96E</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-circle" style="background:#D4651A;"></div>
+      <div class="swatch-name">Rust / Urgent</div>
+      <div class="swatch-hex">#D4651A</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-circle" style="background:#F5F0E8; border-color:rgba(255,255,255,0.3);"></div>
+      <div class="swatch-name">Sand BG</div>
+      <div class="swatch-hex">#F5F0E8</div>
+    </div>
+  </div>
+
+  <div class="type-samples">
+    <div class="type-row"><span class="type-label">Display / Hero</span><span class="t-display">Syne 800</span></div>
+    <div class="type-row"><span class="type-label">Headings</span><span class="t-h2">Syne 700</span></div>
+    <div class="type-row"><span class="type-label">Body text</span><span class="t-body">DM Sans 400 — readable on low-res screens</span></div>
+    <div class="type-row"><span class="type-label">Captions</span><span class="t-caption">DM Sans 300 — secondary info</span></div>
+    <div class="type-row"><span class="type-label">Buttons / CTAs</span><span class="t-btn">DM Sans 600</span></div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="footer">
+  <strong>Rural Market Connector</strong> — UI/UX Design Concept &nbsp;·&nbsp; Built for South African rural markets &nbsp;·&nbsp; Figma design system coming next
+</div>
+
+</body>
+</html>
